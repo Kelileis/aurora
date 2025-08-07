@@ -4,12 +4,13 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MediaResource\Pages;
 use App\Models\Media;
+use App\Tables\Columns\VideoColumn;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
@@ -53,8 +54,11 @@ class MediaResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('path')
-                    ->circular()
+                VideoColumn::make('path')
+                    ->label('Preview'),
+                TextColumn::make('description'),
+                TextColumn::make('updated_at'),
+                TextColumn::make('created_at'),
             ])
             ->filters([
                 //
