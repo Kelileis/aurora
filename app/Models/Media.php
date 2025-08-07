@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Media extends Model
 {
@@ -15,4 +16,12 @@ class Media extends Model
        'path',
        'description',
     ];
+
+    /**
+     * Get the scans associated with the media.
+     */
+    public function scans(): HasMany
+    {
+        return $this->hasMany(Scan::class);
+    }
 }
