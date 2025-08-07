@@ -123,4 +123,23 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'anomalies' => [
+        'list' => [
+            [
+                'label' => 'NO_FACE',
+                'name' => 'No face detection',
+                'default' => false,
+            ],
+            [
+                'label' => 'MORE_FACE',
+                'name' => 'More face detection',
+                'default' => false,
+            ],
+            [
+                'label' => 'LESS_FACE',
+                'name' => 'Less face detection',
+                'default' => false,
+            ],
+        ],
+    ],
 ];
