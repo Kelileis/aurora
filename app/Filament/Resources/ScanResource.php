@@ -6,12 +6,15 @@ use App\Filament\Resources\ScanResource\Pages;
 use App\Filament\Resources\ScanResource\RelationManagers;
 use App\Models\Scan;
 use App\Services\ConfigurationService;
+use App\Tables\Columns\VideoColumn;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -33,6 +36,18 @@ class ScanResource extends Resource
                     ->helperText('Add a clear description of the scan.')
                     ->required(),
                 /**
+                 * Media
+                 */
+                Fieldset::make('Media')
+                    ->schema([
+                        Select::make('media_id')
+                            ->label('Media')
+                            ->relationship('media', 'description') // 'media' = relation method, 'name' = column in Media model
+                            ->searchable()
+                            ->preload()
+                            ->required()
+                    ]),
+                /**
                  * Configuration
                  */
                 Fieldset::make('Configuration')
@@ -47,7 +62,12 @@ class ScanResource extends Resource
     {
         return $table
             ->columns([
-                //
+                VideoColumn::make('media.path')
+                    ->label('Media preview'),
+                TextColumn::make('name'),
+                TextColumn::make('updated_at'),
+                TextColumn::make('created_at'),
+
             ])
             ->filters([
                 //

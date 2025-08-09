@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('media_id')->constrained();
             $table->string('name')->comment('The name of the scan.')->index();
-            $table->string('configuration')->comment('The configuration of the scan.');
-            $table->json('media_frames_data')->comment('The frames data of the media file');
-            $table->json('anomalies_data')->comment('The anomalies data of the media file frames.');
-            $table->json('violations_data')->comment('The violations data of the media file.');
+            $table->jsonb('configuration')->comment('The configuration of the scan.');
+            $table->jsonb('media_frames_data')->comment('The frames data of the media file')->nullable()->default(null);
+            $table->jsonb('anomalies_data')->comment('The anomalies data of the media file frames.')->nullable()->default(null);
+            $table->jsonb('violations_data')->comment('The violations data of the media file.')->nullable()->default(null);
             $table->timestamps();
         });
     }

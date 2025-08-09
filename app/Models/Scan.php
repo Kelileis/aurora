@@ -3,16 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Scan extends Model
 {
+    protected $casts = [
+        'configuration' => 'array',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
     protected $fillable = [
+        'name',
         'media_id',
         'configuration',
         'media_frames_data',
@@ -23,8 +29,8 @@ class Scan extends Model
     /**
      * Get the media associated with the scan.
      */
-    public function media(): HasOne
+    public function media(): BelongsTo
     {
-        return $this->hasOne(Media::class);
+        return $this->belongsTo(Media::class);
     }
 }
