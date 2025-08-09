@@ -6,6 +6,7 @@ use App\Filament\Resources\ScanResource\Pages;
 use App\Filament\Resources\ScanResource\RelationManagers;
 use App\Models\Scan;
 use App\Services\ConfigurationService;
+use App\Tables\Columns\ScanProgressIndicatorColumn;
 use App\Tables\Columns\VideoColumn;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
@@ -67,7 +68,7 @@ class ScanResource extends Resource
                 TextColumn::make('name'),
                 TextColumn::make('updated_at'),
                 TextColumn::make('created_at'),
-
+                ScanProgressIndicatorColumn::make('progress'),
             ])
             ->filters([
                 //
