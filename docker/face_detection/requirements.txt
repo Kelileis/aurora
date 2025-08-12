@@ -1,0 +1,3 @@
+tensorflow @ file://localhost/app/tensorflow-2.13.1-cp38-cp38-linux_x86_64.whl
+deepface
+Deprecated
