@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Constants\Queues;
 use App\Models\Scan;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -38,5 +39,11 @@ class CutMediaIntoFrames implements ShouldQueue
 
         $this->scan->media_frames_data = json_encode($mediaFrameFiles);
         $this->scan->save();
+
+        foreach ($mediaFrameFiles as $mediaFrameFile) {
+            AnalyzeMediaFrame::dispatch($this->scan, $mediaFrameFile)
+                ->onConnection('redis')
+                ->onQueue(Queues::MEDIA_FRAME_ANALYZING_QUEUE);
+        }
     }
 }

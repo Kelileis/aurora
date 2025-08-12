@@ -22,6 +22,7 @@ class Scan extends Model
         'media_id',
         'configuration',
         'media_frames_data',
+        'media_frames_analyzation_data',
         'anomalies_data',
         'violations_data',
     ];
