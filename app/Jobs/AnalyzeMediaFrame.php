@@ -41,5 +41,16 @@ class AnalyzeMediaFrame implements ShouldQueue
             ->update([
                 'media_frames_analyzation_data' => DB::raw("JSON_MERGE_PATCH(media_frames_analyzation_data, '$patch')")
             ]);
+
+        $result = DB::selectOne('
+            SELECT
+                JSON_LENGTH(media_frames_analyzation_data) AS analyzation_count,
+                JSON_LENGTH(media_frames_data) AS media_frames_count
+            FROM scans WHERE id = ?
+        ', [$this->scan->id]);
+
+        if ($result && $result->analyzation_count === $result->media_frames_count) {
+            var_dump('DONE!');
+        }
     }
 }

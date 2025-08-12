@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('name')->comment('The name of the scan.')->index();
             $table->jsonb('configuration')->comment('The configuration of the scan.');
             $table->jsonb('media_frames_data')->comment('The frames data of the media file')->nullable()->default(null);
-            $table->jsonb('media_frames_analyzation_data')->comment('The frames analyzation data of the media file')->nullable()->default(null);
-            $table->jsonb('anomalies_data')->comment('The anomalies data of the media file frames.')->nullable()->default(null);
-            $table->jsonb('violations_data')->comment('The violations data of the media file.')->nullable()->default(null);
+            $table->jsonb('media_frames_analyzation_data')->comment('The frames analyzation data of the media file')->nullable()->default('{}');
+            $table->jsonb('anomalies_data')->comment('The anomalies data of the media file frames.')->nullable()->default('{}');
+            $table->jsonb('violations_data')->comment('The violations data of the media file.')->nullable()->default('{}');
             $table->timestamps();
         });
     }
