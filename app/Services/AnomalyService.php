@@ -19,13 +19,8 @@ class AnomalyService
 
         $anomaliesData = [];
 
-        var_dump($configuration);
-
         foreach ($configuration as $anomalyName => $enabled) {
             if (!$enabled) continue;
-
-            var_dump($anomalyName);
-            var_dump($enabled);
 
             // Do the anomaly check
             foreach ($mediaFrameAnalyzations as $mediaFramePath => $mediaFrameAnalyzation) {
@@ -34,8 +29,6 @@ class AnomalyService
                 }
 
                 $anomaly = $this->getAnomalyByName($anomalyName);
-
-                var_dump(get_class($anomaly));
 
                 if (empty($anomaly)) continue;
 

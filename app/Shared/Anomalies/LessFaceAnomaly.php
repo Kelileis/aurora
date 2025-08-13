@@ -2,7 +2,7 @@
 
 namespace App\Shared\Anomalies;
 
-class MoreFaceAnomaly extends Anomaly
+class LessFaceAnomaly extends Anomaly
 {
     /**
      * @param array $analyzation
@@ -11,8 +11,8 @@ class MoreFaceAnomaly extends Anomaly
      */
     public function check(array $analyzation, array $configuration): bool
     {
-        if (empty($analyzation['results'])) return false;
+        if (empty($analyzation['results'])) return true;
 
-        return count($analyzation['results']) >= $configuration['MORE_FACE_COUNT'];
+        return count($analyzation['results']) < $configuration['LESS_FACE_COUNT'];
     }
 }
