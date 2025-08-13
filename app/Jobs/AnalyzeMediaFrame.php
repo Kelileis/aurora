@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Constants\Queues;
 use App\Models\Scan;
 use App\Services\FaceDetectionService;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -49,8 +50,14 @@ class AnalyzeMediaFrame implements ShouldQueue
             FROM scans WHERE id = ?
         ', [$this->scan->id]);
 
+        /**
+         * All the frames have been processed
+         */
         if ($result && $result->analyzation_count === $result->media_frames_count) {
-            var_dump('DONE!');
+            var_dump('processed');
+            RunAnomalyDetection::dispatch($this->scan)
+                ->onConnection('redis')
+                ->onQueue(Queues::ANOMALY_DETECTION_QUEUE);
         }
     }
 }

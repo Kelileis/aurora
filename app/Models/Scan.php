@@ -10,6 +10,7 @@ class Scan extends Model
 {
     protected $casts = [
         'configuration' => 'array',
+        'media_frames_analyzation_data' => 'array',
     ];
 
     /**

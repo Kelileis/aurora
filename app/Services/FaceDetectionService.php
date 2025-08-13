@@ -19,6 +19,6 @@ class FaceDetectionService
             'distance_metric' => 'cosine',
         ]);
 
-        return $response->json();
+        return $response->json() ?? [];
     }
 }
