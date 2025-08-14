@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Constants\Anomalies;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -14,9 +15,9 @@ class ConfigurationService
         return collect(config('app.anomalies.list'))
             ->map(function ($anomaly) {
                 // Special handling for MORE_FACE / LESS_FACE
-                if (in_array($anomaly['label'], ['MORE_FACE', 'LESS_FACE'])) {
+                if (in_array($anomaly['label'], [Anomalies::LESS_FACE->value, Anomalies::MORE_FACE->value])) {
                     // Choose label text depending on anomaly
-                    $countLabel = $anomaly['label'] === 'MORE_FACE'
+                    $countLabel = $anomaly['label'] === Anomalies::MORE_FACE->value
                         ? 'At least'
                         : 'Less than';
 
@@ -29,7 +30,7 @@ class ConfigurationService
                                 ->live() // so visibility updates instantly
                                 ->columnSpan(6),
 
-                            TextInput::make('configuration.' . $anomaly['label'] . '_COUNT')
+                            TextInput::make('configuration.' . $anomaly['label'] . '_count')
                                 ->label($countLabel . ' (faces)')
                                 ->numeric()
                                 ->minValue(1)

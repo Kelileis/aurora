@@ -2,6 +2,8 @@
 
 namespace App\Shared\Anomalies;
 
+use App\Constants\Anomalies;
+
 class LessFaceAnomaly extends Anomaly
 {
     /**
@@ -13,6 +15,6 @@ class LessFaceAnomaly extends Anomaly
     {
         if (empty($analyzation['results'])) return true;
 
-        return count($analyzation['results']) < $configuration['LESS_FACE_COUNT'];
+        return count($analyzation['results']) < $configuration[Anomalies::LESS_FACE->value . '_count'];
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Shared\Anomalies;
 
+use App\Constants\Anomalies;
+
 class MoreFaceAnomaly extends Anomaly
 {
     /**
@@ -13,6 +15,6 @@ class MoreFaceAnomaly extends Anomaly
     {
         if (empty($analyzation['results'])) return false;
 
-        return count($analyzation['results']) >= $configuration['MORE_FACE_COUNT'];
+        return count($analyzation['results']) >= (int) $configuration[Anomalies::MORE_FACE->value . '_count'];
     }
 }

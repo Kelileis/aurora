@@ -2,8 +2,11 @@
 
 namespace App\Services;
 
+use App\Constants\Anomalies;
 use App\Models\Scan;
 use App\Shared\Anomalies\Anomaly;
+use App\Shared\Anomalies\LessFaceAnomaly;
+use App\Shared\Anomalies\MoreFaceAnomaly;
 use App\Shared\Anomalies\NoFaceAnomaly;
 
 class AnomalyService
@@ -49,7 +52,9 @@ class AnomalyService
     private function getAnomalyByName(string $anomalyName): ?Anomaly
     {
         return match ($anomalyName) {
-            'NO_FACE' => new NoFaceAnomaly(),
+            Anomalies::NO_FACE->value => new NoFaceAnomaly(),
+            Anomalies::LESS_FACE->value => new LessFaceAnomaly(),
+            Anomalies::MORE_FACE->value => new MoreFaceAnomaly(),
             default => null,
         };
     }

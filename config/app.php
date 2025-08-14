@@ -1,5 +1,7 @@
 <?php
 
+use App\Constants\Anomalies;
+
 return [
 
     /*
@@ -126,17 +128,17 @@ return [
     'anomalies' => [
         'list' => [
             [
-                'label' => 'NO_FACE',
+                'label' => Anomalies::NO_FACE->value,
                 'name' => 'No face detection',
                 'default' => false,
             ],
             [
-                'label' => 'MORE_FACE',
+                'label' => Anomalies::MORE_FACE->value,
                 'name' => 'More face detection',
                 'default' => false,
             ],
             [
-                'label' => 'LESS_FACE',
+                'label' => Anomalies::LESS_FACE->value,
                 'name' => 'Less face detection',
                 'default' => false,
             ],
