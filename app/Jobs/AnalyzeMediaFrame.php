@@ -29,7 +29,10 @@ class AnalyzeMediaFrame implements ShouldQueue
      */
     public function handle(): void
     {
-        $response = FaceDetectionService::analyzeMediaFrame(asset('storage') . '/' . $this->mediaFrame);
+        $response = FaceDetectionService::analyzeMediaFrame(
+            $this->scan->configuration,
+            asset('storage') . '/' . $this->mediaFrame
+        );
 
         // Prepare JSON fragment to merge
         $patch = json_encode([
